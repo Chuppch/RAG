@@ -1,0 +1,43 @@
+server:
+  port: 8090
+
+spring:
+  ai:
+    ollama:
+      base-url: http://111.170.34.94:11434
+    
+    # pgvector配置
+    vectorstore:
+      pgvector:
+        url: jdbc:postgresql://111.170.34.94:25432/ai-rag-knowledge
+        username: postgres
+        password: postgres
+        table-name: vector_store
+        dimensions: 1536  # 根据你的向量维度调整
+  
+  # PostgreSQL向量数据库配置
+  datasource:
+    url: jdbc:postgresql://111.170.34.94:25432/ai-rag-knowledge
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+# Redis
+redis:
+  sdk:
+    config:
+      host: 111.170.34.94
+      port: 26379
+      pool-size: 10
+      min-idle-size: 5
+      idle-timeout: 30000
+      connect-timeout: 5000
+      retry-attempts: 3
+      retry-interval: 1000
+      ping-interval: 60000
+      keep-alive: true
+
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
